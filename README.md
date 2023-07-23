@@ -2,7 +2,7 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Tools-Android-informational?style=flat-square&logo=android&color=3DDC84" alt="Android" />
-    <img src="https://img.shields.io/badge/Code-Kotlin-informational?style=flat-square&logo=kotlin&color=0095D5" alt="Kotlin" />
+    <img src="https://img.shields.io/badge/Code-Kotlin-informational?style=flat-square&logo=kotlin&color=#7F52FF" alt="Kotlin" />
 </p>
 
 ## 💬 About
@@ -60,4 +60,4 @@ cd lm-expense-control-app
 
 ---
 
-> @ Generated with [ShubcoGen Template™](https://github.com/filipe1309/shubcogen-template) {{ VERSION }}  
+> @ Generated with [ShubcoGen Template™](https://github.com/filipe1309/shubcogen-template) 
