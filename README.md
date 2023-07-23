@@ -2,7 +2,7 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Tools-Android-informational?style=flat-square&logo=android&color=3DDC84" alt="Android" />
-    <img src="https://img.shields.io/badge/Code-Kotlin-informational?style=flat-square&logo=kotlin&color=#7F52FF" alt="Kotlin" />
+    <img src="https://img.shields.io/badge/Code-Kotlin-informational?style=flat-square&logo=kotlin&color=7F52FF" alt="Kotlin" />
 </p>
 
 ## 💬 About
