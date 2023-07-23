@@ -55,7 +55,7 @@ cd lm-expense-control-app
 ---
 
 <p align="center">
-    Done with&nbsp;&nbsp;:heart:&nbsp;&nbsp;by <a style="font-weight: bold" href="https://github.com/filipe1309/">{{ GIT_USERNAME }}</a> 🖖
+    Done with&nbsp;&nbsp;:heart:&nbsp;&nbsp;by <a style="font-weight: bold" href="https://github.com/filipe1309/">Filipe Leuch Bonfim</a> 🖖
 </p>
 
 ---
