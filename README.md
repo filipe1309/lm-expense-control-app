@@ -9,7 +9,7 @@
 
 This project was developed following Lucas Montano && Neto Marin "[Zero ao App](https://comercial1657028932.kpages.online/zero-ao-app)" course.
 
-![image](https://github.com/filipe1309/lm-expense-control-app/assets/2081014/4cea7873-ae09-4547-a4b7-eed47a8d539d)
+![image](overview_screen.png)
 
 - Creating an application from scratch with Jetpack Compose;
 - Using KMM to build an app on iOS;
