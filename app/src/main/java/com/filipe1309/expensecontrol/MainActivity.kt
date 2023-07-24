@@ -52,10 +52,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ExpenseControlTheme {
-                Column {
-                    Welcome()
-                    Transactions()
-                }
+                OverviewScreen()
             }
         }
     }

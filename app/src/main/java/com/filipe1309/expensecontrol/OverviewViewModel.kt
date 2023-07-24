@@ -22,18 +22,6 @@ class OverviewViewModel(
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState
 
-    init {
-        val name = "Filipe"
-        viewModelScope.launch {
-            var letter = 1
-            name.forEach { _ ->
-                delay(1000)
-                _uiState.value = UiState(userName = name.substring(0, letter))
-                letter++
-            }
-        }
-    }
-
     fun addTransaction(transaction: Transaction) {
         repository.add(transaction)
         updateUiState()

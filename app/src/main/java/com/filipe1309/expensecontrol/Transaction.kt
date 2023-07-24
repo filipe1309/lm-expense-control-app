@@ -6,7 +6,7 @@ import java.util.UUID
 
 data class Transaction(
     val uuid: String = UUID.randomUUID().toString(),
-    val category: String? = null,
+    val category: String = "",
     val value: BigDecimal = BigDecimal.ZERO,
     val date: Date = Date()
 )
