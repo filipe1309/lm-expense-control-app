@@ -34,7 +34,7 @@ class OverviewViewModel(
         }
     }
 
-    fun addTransaction(transaction: String) {
+    fun addTransaction(transaction: Transaction) {
         repository.add(transaction)
         updateUiState()
     }
@@ -44,7 +44,7 @@ class OverviewViewModel(
         updateUiState()
     }
 
-    fun updateTransaction(transaction: String) {
+    fun updateTransaction(transaction: Transaction) {
         repository.updateTransaction(transaction)
         updateUiState()
     }
