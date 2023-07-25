@@ -18,6 +18,16 @@ This project was developed following Lucas Montano && Neto Marin "[Zero ao App](
 - Sending Push Notification with Firebase;
 - Integrating with Artificial Intelligence from OpenAI.
 
+## Classes
+
+- [x] Aula 1 [ Introdução ao Jetpack Compose ]
+- [x] Aula 2 [ Scaffold & Animações ]
+- [ ] Aula 3 [ Introdução ao KMM ]
+- [ ] Aula 4 [ Integrando com OpenAI ]
+- [ ] Aula 5 [ Hello Compose Multiplatform ]
+- [ ] Aula 6 [ KMM e SpaceX API: We have a lift off! ]
+- [ ] Aula 7 [ Tirando Duvidas sobre Android ]
+
 ## :computer: Technologies
 
 - [kotlin](https://kotlinlang.org/)
