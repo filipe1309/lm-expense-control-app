@@ -2,6 +2,11 @@ package com.filipe1309.expensecontrol
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.filipe1309.expensecontrol.network.OpenAIPrompt
+import com.filipe1309.expensecontrol.network.OpenAIService
+import com.filipe1309.expensecontrol.network.RetrofitModule
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -9,7 +14,9 @@ import kotlinx.coroutines.launch
 import java.math.BigDecimal
 
 class OverviewViewModel(
-    private val repository: DummyRepository = DummyRepository()
+    private val repository: DummyRepository = DummyRepository(),
+    private val openAIService: OpenAIService = RetrofitModule.provideOpenAIService(),
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     data class UiState(
@@ -22,6 +29,21 @@ class OverviewViewModel(
     private val filter = MutableStateFlow<String?>(null)
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState
+
+    init {
+        val prompt = "Give me a small personal finance advice"
+        viewModelScope.launch(ioDispatcher) {
+            val response = openAIService.completitions(OpenAIPrompt(prompt))
+            if (response.isSuccessful) {
+                response.body()?.choices?.first()?.text.let {advice ->
+                    _uiState.value = _uiState.value.copy(
+                        advice = advice ?: "Keep your expenses under control"
+                    )
+                }
+            }
+        }
+
+    }
 
     fun addTransaction(transaction: Transaction) {
         repository.add(transaction)
@@ -62,7 +84,7 @@ class OverviewViewModel(
         } else {
             transactionListSaved
         }
-        _uiState.value = UiState(
+        _uiState.value = _uiState.value.copy(
             transactions = transactions,
             total = transactionListSaved.sumOf { it.value }
         )
