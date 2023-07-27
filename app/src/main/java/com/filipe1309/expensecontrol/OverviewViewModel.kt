@@ -13,6 +13,7 @@ class OverviewViewModel(
 ) : ViewModel() {
 
     data class UiState(
+        val advice: String = "Keep your expenses under control",
         val userName: String = "",
         val transactions: List<Transaction> = emptyList(),
         val total: BigDecimal = transactions.sumOf { it.value }

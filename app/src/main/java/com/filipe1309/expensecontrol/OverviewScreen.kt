@@ -8,12 +8,14 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,6 +24,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowCircleUp
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowRight
 import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -36,8 +40,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -102,27 +109,37 @@ fun OverviewScreen(viewModel: OverviewViewModel = viewModel()) {
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val scope = rememberCoroutineScope()
 
-        Column(Modifier.padding(it)) {
-            Text(
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                text = "Transactions"
-            )
-            LazyColumn(
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp),
-                state = listState
-            ) {
-                items(uiState.transactions) { transaction ->
-                    TransactionCard(
-                        uuid = transaction.uuid,
-                        value = transaction.value,
-                        category = transaction.category,
-                        date = transaction.date.formatDate()
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
+        LazyColumn(
+            modifier = Modifier.padding(it),
+            contentPadding = PaddingValues(bottom = 16.dp),
+            state = listState
+        ) {
+
+            item {
+                AdviceToggle(uiState.advice)
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            item {
+                Text(
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                    text = "Transactions",
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            items(uiState.transactions) { transaction ->
+                TransactionCard(
+                    uuid = transaction.uuid,
+                    value = transaction.value,
+                    category = transaction.category,
+                    date = transaction.date.formatDate()
+                )
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
+
         AnimatedVisibility(
             visible = showButton,
             enter = slideInVertically(
@@ -155,6 +172,36 @@ fun OverviewScreen(viewModel: OverviewViewModel = viewModel()) {
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun AdviceToggle(advice: String) {
+    var isVisible by rememberSaveable { mutableStateOf(false) }
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { isVisible = !isVisible }
+                .padding(16.dp),
+        ) {
+            Text(
+                modifier = Modifier.weight(1f),
+                text = "Daily Insights",
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Icon(
+                imageVector = if (isVisible) Icons.Filled.ArrowDropDown else Icons.Filled.ArrowRight,
+                contentDescription = "Toggle Advice"
+            )
+        }
+        AnimatedVisibility(visible = isVisible) {
+            Text(
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                text = advice,
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
     }
 }
